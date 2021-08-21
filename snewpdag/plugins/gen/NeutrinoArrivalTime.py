@@ -49,7 +49,7 @@ class NeutrinoArrivalTime(Node):
         return source
 
 
-    #randomly generate a time between 2000-1-1, 00:00 and 2000-12-31, 23:59:59 UTC for SN neutrino signal to arrive on Earth
+    #randomly generate a time between 2000-1-1, 00:00 and 2000-12-31, 23:59:59 UTC for SN neutrino signal to arrive at the center of the Earth
     #unix time for 2000-1-1, 00:00 is 946713600.0
     def generate_time(self):
         start_unix = 946713600
@@ -59,7 +59,7 @@ class NeutrinoArrivalTime(Node):
         return (s, ns)
 
 
-    #calculate the distance between two detectors
+    #calculate the distance between the detector and the center of the Earth
     #Input: first_det/second_det are arrays of the form [lon, lat, height], 
     #Default arrival time: (vernal equinox): 2000-03-20, 12:00 PM UTC; its unix time is 953582400.0
     def detector_diff(self, detector, arrival=(953582400, 0)):
@@ -112,7 +112,7 @@ class NeutrinoArrivalTime(Node):
             ns = t[1]+ round(time_delay*1e9)
             a = (s, ns)
             arrival_time = tuple(lib.normalize_time(a))
-            d['sn_times'][name] = arrival_time
+            d['sn_time'][name] = arrival_time
 
         if 'gen' in data:
             data['gen'].update(d)
